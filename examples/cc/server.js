@@ -26,7 +26,7 @@ var RESOURCES = Object.freeze({
 
 server.use(restify.authorizationParser());
 server.use(restify.bodyParser({ mapParams: false }));
-restifyOAuth2.cc(server, { tokenEndpoint: RESOURCES.TOKEN, hooks: hooks });
+restifyOAuth2.cc(server, { endpoint: RESOURCES.TOKEN, hooks: hooks });
 
 
 

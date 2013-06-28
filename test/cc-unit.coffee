@@ -7,12 +7,12 @@ Assertion = require("chai").Assertion
 restify = require("restify")
 restifyOAuth2 = require("..")
 
-tokenEndpoint = "/token-uri"
+endpoint = "/token-uri"
 realm = "Realm string"
 tokenExpirationTime = 12345
 
 Assertion.addMethod("unauthorized", (message, options) ->
-    expectedLink = '<' + tokenEndpoint + '>; rel="oauth2-token"; grant-types="client_credentials"; token-types="bearer"'
+    expectedLink = '<' + endpoint + '>; rel="oauth2-token"; grant-types="client_credentials"; token-types="bearer"'
     expectedWwwAuthenticate = 'Bearer realm="' +  realm + '"'
 
     if not options?.noWwwAuthenticateErrors
@@ -26,7 +26,7 @@ Assertion.addMethod("unauthorized", (message, options) ->
 )
 
 Assertion.addMethod("bad", (message) ->
-    expectedLink = '<' + tokenEndpoint + '>; rel="oauth2-token"; grant-types="client_credentials"; token-types="bearer"'
+    expectedLink = '<' + endpoint + '>; rel="oauth2-token"; grant-types="client_credentials"; token-types="bearer"'
     expectedWwwAuthenticate = 'Bearer realm="' +  realm + '", error="invalid_request", ' +
                               'error_description="' + message + '"'
 
@@ -58,7 +58,7 @@ beforeEach ->
     @grantClientToken = sinon.stub()
 
     options = {
-        tokenEndpoint
+        endpoint
         realm
         tokenExpirationTime
         hooks: {
@@ -73,12 +73,12 @@ describe "Client Credentials flow", ->
     it "should set up the token endpoint", ->
         @doIt()
 
-        @server.get.should.have.been.calledWith(tokenEndpoint)
+        @server.get.should.have.been.calledWith(endpoint)
 
     describe "For GET requests to the token endpoint", ->
         beforeEach ->
             @req.method = "GET"
-            @req.path = => tokenEndpoint
+            @req.path = => endpoint
 
             baseDoIt = @doIt
             @doIt = =>
