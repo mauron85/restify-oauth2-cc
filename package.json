@@ -1,0 +1,35 @@
+{
+  "name": "restify-oauth2-cc",
+  "description": "OAuth 2 client credentials flow endpoint for restify",
+  "keywords": ["restify", "oauth", "oauth2", "rest", "authentication", "api"],
+  "version": "2.1.1",
+  "author": "muji <noop@xpm.io>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/freeformsystems/restify-oauth2-cc.git"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "npm run test-ropc-unit && npm run test-cc-unit && npm run test-ropc-integration && npm run test-cc-integration",
+    "test-cc-unit": "mocha test/cc-unit.coffee -C --reporter spec --compilers coffee:coffee-script",
+    "test-cc-integration": "vows test/cc-integration.coffee --spec"
+  },
+  "dependencies": {
+    "underscore": "1.x"
+  },
+  "peerDependencies": {
+    "restify": "2.x"
+  },
+  "devDependencies": {
+    "api-easy": ">= 0.3.8",
+    "coffee-script": ">= 1.6.2",
+    "chai": ">= 1.6.0",
+    "jshint": ">= 2.1.2",
+    "mocha": ">= 1.9.0",
+    "restify": ">= 2.5.1",
+    "sinon": ">= 1.7.2",
+    "sinon-chai": ">= 2.4.0",
+    "vows": ">= 0.7.0"
+  }
+}
