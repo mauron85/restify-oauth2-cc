@@ -15,9 +15,6 @@
     "test-cc-unit": "mocha test/cc-unit.coffee -C --reporter spec --compilers coffee:coffee-script",
     "test-cc-integration": "vows test/cc-integration.coffee --spec"
   },
-  "dependencies": {
-    "underscore": "1.x"
-  },
   "peerDependencies": {
     "restify": "2.x"
   },
