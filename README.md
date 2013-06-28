@@ -1,7 +1,7 @@
 # Restify OAuth2 (cc only)
 
-A fork of [restify-oauth2](restify-oauth2) that
-removes the *Resource Owner Password Credentials* support and makes authentication
+A fork of [restify-oauth2][restify-oauth2] that removes the
+[Resource Owner Password Credentials][ropc] support and makes authentication
 token generation a `GET` rather than a `POST` request.
 
 ## Differences
@@ -14,7 +14,18 @@ The following list indicates the differences with the initial implementation.
 * `wwwAuthenticateRealm` option renamed to `realm`
 * `tokenExpirationTime` option renamed to `expires`
 
-Documentation is available at the [original repository](restify-oauth2).
+Documentation is available at the [original repository][restify-oauth2].
+
+## Configuration
+
+```js
+var restify = require("restify");
+var oauth2 = require("restify-oauth2-cc");
+var server = restify.createServer({ name: "My cool server", version: "1.0.0" });
+server.use(restify.authorizationParser());
+server.use(restify.bodyParser({ mapParams: false }));
+oauth2.cc(server, options);
+```
 
 [restify]: http://mcavage.github.com/node-restify/
 [restify-oauth2]: https://github.com/domenic/restify-oauth2
