@@ -208,7 +208,7 @@ describe "Client Credentials flow", ->
 
                     @req.resume.should.have.been.called
                     @res.should.be.unauthorized(
-                        "Bearer token invalid. Follow the oauth2-token link to get a valid one!"
+                        "Bearer token invalid."
                     )
 
             describe "when the `authenticateToken` calls back with a 401 error", ->
@@ -253,7 +253,7 @@ describe "Client Credentials flow", ->
             it "should send a 400 response with WWW-Authenticate and Link headers", ->
                 @doIt()
 
-                @res.should.be.bad("Bearer token required. Follow the oauth2-token link to get one!")
+                @res.should.be.bad("Bearer token required.")
 
         describe "with an authorization header that contains an empty bearer token", ->
             beforeEach ->
@@ -264,7 +264,7 @@ describe "Client Credentials flow", ->
             it "should send a 400 response with WWW-Authenticate and Link headers", ->
                 @doIt()
 
-                @res.should.be.bad("Bearer token required. Follow the oauth2-token link to get one!")
+                @res.should.be.bad("Bearer token required.")
 
     describe "`res.sendUnauthorized`", ->
         beforeEach -> @doIt()
@@ -275,7 +275,7 @@ describe "Client Credentials flow", ->
             it "should send a 401 response with WWW-Authenticate (but with no error code) and Link headers, plus the " +
                "default message", ->
                 @res.should.be.unauthorized(
-                    "Authorization via bearer token required. Follow the oauth2-token link to get one!"
+                    "Authorization via bearer token required."
                     noWwwAuthenticateErrors: true
                 )
 

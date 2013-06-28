@@ -14,6 +14,7 @@ The following list indicates the differences with the initial implementation.
 * `wwwAuthenticateRealm` option renamed to `realm`.
 * `tokenExpirationTime` option renamed to `expires`.
 * Remove dependency on underscore.
+* Remove *oauth2-token link* messages.
 
 Documentation is available at the [original repository][restify-oauth2].
 
@@ -22,7 +23,7 @@ Documentation is available at the [original repository][restify-oauth2].
 ```js
 var restify = require("restify");
 var oauth2 = require("restify-oauth2-cc");
-var server = restify.createServer({ name: "My cool server", version: "1.0.0" });
+var server = restify.createServer({ name: "Web Services", version: "1.0.0" });
 server.use(restify.authorizationParser());
 server.use(restify.bodyParser({ mapParams: false }));
 oauth2.cc(server, options);
