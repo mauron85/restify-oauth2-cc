@@ -10,9 +10,10 @@ The following list indicates the differences with the initial implementation.
 
 * Token generation is performed with a GET rather than POST request.
 * Removed support for the request body and `grant_type` field.
-* `tokenEndpoint` option renamed to `endpoint`
-* `wwwAuthenticateRealm` option renamed to `realm`
-* `tokenExpirationTime` option renamed to `expires`
+* `tokenEndpoint` option renamed to `endpoint`.
+* `wwwAuthenticateRealm` option renamed to `realm`.
+* `tokenExpirationTime` option renamed to `expires`.
+* Remove dependency on underscore.
 
 Documentation is available at the [original repository][restify-oauth2].
 
