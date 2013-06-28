@@ -9,7 +9,7 @@ restifyOAuth2 = require("..")
 
 endpoint = "/token-uri"
 realm = "Realm string"
-tokenExpirationTime = 12345
+expires = 12345
 
 Assertion.addMethod("unauthorized", (message, options) ->
     expectedLink = '<' + endpoint + '>; rel="oauth2-token"; grant-types="client_credentials"; token-types="bearer"'
@@ -60,7 +60,7 @@ beforeEach ->
     options = {
         endpoint
         realm
-        tokenExpirationTime
+        expires
         hooks: {
             @authenticateToken
             @grantClientToken
@@ -114,7 +114,7 @@ describe "Client Credentials flow", ->
                             @res.send.should.have.been.calledWith(
                                 access_token: @token,
                                 token_type: "Bearer"
-                                expires_in: tokenExpirationTime
+                                expires_in: expires
                             )
 
                     describe "when `grantClientToken` calls back with `false`", ->
