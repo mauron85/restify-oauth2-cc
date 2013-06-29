@@ -124,7 +124,7 @@ describe "Client Credentials flow", ->
                             @doIt()
 
                             @res.should.be.an.oauthError("Unauthorized", "invalid_client",
-                                                         "Client ID and secret did not authenticate.")
+                                                         "Authentication failed, please verify your credentials")
 
                     describe "when `grantClientToken` calls back with `null`", ->
                         beforeEach -> @grantClientToken.yields(null, null)
@@ -133,7 +133,7 @@ describe "Client Credentials flow", ->
                             @doIt()
 
                             @res.should.be.an.oauthError("Unauthorized", "invalid_client",
-                                                         "Client ID and secret did not authenticate.")
+                                                         "Authentication failed, please verify your credentials")
 
                     describe "when `grantClientToken` calls back with an error", ->
                         beforeEach ->

@@ -24,6 +24,7 @@ The following list indicates the differences with the initial implementation.
 * Remove dependency on underscore.
 * Remove *oauth2-token link* messages.
 * Rename `clientId` to `user`.
+* Change various messages to be more professional.
 
 Documentation is available at the [original repository][restify-oauth2].
 
@@ -34,9 +35,13 @@ var restify = require("restify");
 var oauth2 = require("restify-oauth2-cc");
 var server = restify.createServer({ name: "Web Services", version: "1.0.0" });
 server.use(restify.authorizationParser());
-server.use(restify.bodyParser({ mapParams: false }));
 oauth2.cc(server, options);
 ```
+
+## Notes
+
+* Unlike the original implementation the [restify][restify] body parser is not required to use this package.
+* The `user` fields name was chosen as it is more consistent with other parts of our real-world application that use [express][express] and [passport][passport]. In addition, in a real application you typically want to assign a complex object (user model) to the request object rather than an identifier, therefore `user` is probably more semantically correct.
 
 [restify]: http://mcavage.github.com/node-restify/
 [restify-oauth2]: https://github.com/domenic/restify-oauth2
@@ -50,3 +55,5 @@ oauth2.cc(server, options);
 [oauth2-token-rel]: http://tools.ietf.org/html/draft-wmills-oauth-lrdd-07#section-3.2
 [web-linking]: http://tools.ietf.org/html/rfc5988
 [www-authenticate]: http://tools.ietf.org/html/rfc2617#section-3.2.1
+[express]: http://expressjs.com/
+[passport]: http://passportjs.org/
