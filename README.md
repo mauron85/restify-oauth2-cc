@@ -4,7 +4,15 @@ A fork of [restify-oauth2][restify-oauth2] that removes the
 [Resource Owner Password Credentials][ropc] support and makes authentication
 token generation a `GET` rather than a `POST` request.
 
-## Differences
+## Unit Tests
+
+```
+npm test
+```
+
+Runs all the unit and integration tests. All tests from the original repository pass after the modifications listed below.
+
+## Modifications
 
 The following list indicates the differences with the initial implementation.
 
