@@ -15,6 +15,7 @@ The following list indicates the differences with the initial implementation.
 * `tokenExpirationTime` option renamed to `expires`.
 * Remove dependency on underscore.
 * Remove *oauth2-token link* messages.
+* Rename `clientId` to `user`.
 
 Documentation is available at the [original repository][restify-oauth2].
 

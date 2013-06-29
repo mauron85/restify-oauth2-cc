@@ -93,15 +93,15 @@ describe "Client Credentials flow", ->
 
                 describe "with a basic access authentication header", ->
                     beforeEach ->
-                        [@clientId, @clientSecret] = ["clientId123", "clientSecret456"]
+                        [@user, @clientSecret] = ["user123", "clientSecret456"]
                         @req.authorization =
                             scheme: "Basic"
-                            basic: { username: @clientId, password: @clientSecret }
+                            basic: { username: @user, password: @clientSecret }
 
                     it "should use the client ID and secret  values to grant a token", ->
                         @doIt()
 
-                        @grantClientToken.should.have.been.calledWith(@clientId, @clientSecret)
+                        @grantClientToken.should.have.been.calledWith(@user, @clientSecret)
 
                     describe "when `grantClientToken` calls back with a token", ->
                         beforeEach ->
@@ -190,14 +190,14 @@ describe "Client Credentials flow", ->
 
             describe "when the `authenticateToken` calls back with a client ID", ->
                 beforeEach ->
-                    @clientId = "client123"
-                    @authenticateToken.yields(null, @clientId)
+                    @user = "client123"
+                    @authenticateToken.yields(null, @user)
 
-                it "should resume the request, set the `clientId` property on the request, and call `next`", ->
+                it "should resume the request, set the `user` property on the request, and call `next`", ->
                     @doIt()
 
                     @req.resume.should.have.been.called
-                    @req.should.have.property("clientId", @clientId)
+                    @req.should.have.property("user", @user)
                     @next.should.have.been.calledWithExactly()
 
             describe "when the `authenticateToken` calls back with `false`", ->
@@ -237,10 +237,10 @@ describe "Client Credentials flow", ->
         describe "without an authorization header", ->
             beforeEach -> @req.authorization = {}
 
-            it "should not set `req.clientId`, and simply call `next`", ->
+            it "should not set `req.user`, and simply call `next`", ->
                 @doIt()
 
-                should.not.exist(@req.clientId)
+                should.not.exist(@req.user)
                 @next.should.have.been.calledWithExactly()
 
         describe "with an authorization header that does not contain a bearer token", ->

@@ -38,7 +38,7 @@ server.get(RESOURCES.INITIAL, function (req, res) {
         }
     };
 
-    if (req.clientId) {
+    if (req.user) {
         response._links["http://rel.example.com/secret"] = { href: RESOURCES.SECRET };
     } else {
         response._links["oauth2-token"] = {
@@ -57,12 +57,12 @@ server.get(RESOURCES.PUBLIC, function (req, res) {
         "public resource": "is public",
         "it's not even": "a linked HAL resource",
         "just plain": "application/json",
-        "personalized message": req.clientId ? "hi, " + req.clientId + "!" : "hello stranger!"
+        "personalized message": req.user ? "hi, " + req.user + "!" : "hello stranger!"
     });
 });
 
 server.get(RESOURCES.SECRET, function (req, res) {
-    if (!req.clientId) {
+    if (!req.user) {
         return res.sendUnauthorized();
     }
 
