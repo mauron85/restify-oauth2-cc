@@ -166,8 +166,8 @@ describe "Client Credentials flow", ->
                     it "should send a 400 response with error_type=NotAuthorized", ->
                         @doIt()
 
-                        @res.should.be.an.oauthError("Unauthorized", "NotAuthorized",
-                                                     "Authorization header is required")
+                        @res.should.be.an.oauthError("BadRequest", "BadRequest",
+                          "Authorization header is malformed")
 
                     it "should not call the `grantClientToken` hook", ->
                         @doIt()
