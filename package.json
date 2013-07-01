@@ -11,7 +11,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "test": "npm run test-ropc-unit && npm run test-cc-unit && npm run test-ropc-integration && npm run test-cc-integration",
+    "test": "npm run test-cc-unit && npm run test-cc-integration",
     "test-cc-unit": "mocha test/cc-unit.coffee -C --reporter spec --compilers coffee:coffee-script",
     "test-cc-integration": "vows test/cc-integration.coffee --spec"
   },
