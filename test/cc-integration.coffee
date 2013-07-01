@@ -66,7 +66,7 @@ suite
             .get()
                 .expect(401)
                 .expect("should respond with error: invalid_client", (err, res, body) ->
-                    JSON.parse(body).should.have.property("error", "invalid_client")
+                    JSON.parse(body).should.have.property("code", "UnauthorizedError")
                 )
         .undiscuss()
     .unpath().next()

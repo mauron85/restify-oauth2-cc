@@ -25,6 +25,7 @@ The following list indicates the differences with the initial implementation.
 * Remove *oauth2-token link* messages.
 * Rename `clientId` to `user`.
 * Change various messages to be more professional.
+* Make error output consistent with restify error output.
 
 Documentation is available at the [original repository][restify-oauth2].
 

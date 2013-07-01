@@ -16,7 +16,7 @@ Assertion.addMethod("unauthorized", (message, options) ->
     expectedWwwAuthenticate = 'Bearer realm="' +  realm + '"'
 
     if not options?.noWwwAuthenticateErrors
-        expectedWwwAuthenticate += ', error="invalid_token", error_description="' + message + '"'
+        expectedWwwAuthenticate += ', error="invalid_token", message="' + message + '"'
 
     @_obj.header.should.have.been.calledWith("WWW-Authenticate", expectedWwwAuthenticate)
     @_obj.header.should.have.been.calledWith("Link", expectedLink)
@@ -27,8 +27,8 @@ Assertion.addMethod("unauthorized", (message, options) ->
 
 Assertion.addMethod("bad", (message) ->
     expectedLink = '<' + endpoint + '>; rel="oauth2-token"; grant-types="client_credentials"; token-types="bearer"'
-    expectedWwwAuthenticate = 'Bearer realm="' +  realm + '", error="invalid_request", ' +
-                              'error_description="' + message + '"'
+    expectedWwwAuthenticate = 'Bearer realm="' +  realm + '", error="BadRequest", ' +
+                              'message="' + message + '"'
 
     @_obj.header.should.have.been.calledWith("WWW-Authenticate", expectedWwwAuthenticate)
     @_obj.header.should.have.been.calledWith("Link", expectedLink)
@@ -38,11 +38,11 @@ Assertion.addMethod("bad", (message) ->
 )
 
 Assertion.addMethod("oauthError", (errorClass, errorType, errorDescription) ->
-    desiredBody = { error: errorType, error_description: errorDescription }
+    desiredBody = { code: errorType, message: errorDescription }
     @_obj.send.should.have.been.calledOnce
     @_obj.send.should.have.been.calledWith(sinon.match.instanceOf(restify[errorClass + "Error"]))
     @_obj.send.should.have.been.calledWith(sinon.match.has("message", errorDescription))
-    @_obj.send.should.have.been.calledWith(sinon.match.has("body", desiredBody))
+    #@_obj.send.should.have.been.calledWith(sinon.match.has("code", errorType))
 )
 
 beforeEach ->
@@ -146,11 +146,11 @@ describe "Client Credentials flow", ->
                             @next.should.have.been.calledWithExactly(@error)
 
                 describe "without an authorization header", ->
-                    it "should send a 400 response with error_type=invalid_request", ->
+                    it "should send a 400 response with error_type=BadRequest", ->
                         @doIt()
 
-                        @res.should.be.an.oauthError("BadRequest", "invalid_request",
-                                                     "Must include a basic access authentication header.")
+                        @res.should.be.an.oauthError("BadRequest", "BadRequest",
+                                                     "Must include a basic access authentication header")
 
                     it "should not call the `grantClientToken` hook", ->
                         @doIt()
@@ -163,11 +163,11 @@ describe "Client Credentials flow", ->
                             scheme: "Bearer"
                             credentials: "asdf"
 
-                    it "should send a 400 response with error_type=invalid_request", ->
+                    it "should send a 400 response with error_type=BadRequest", ->
                         @doIt()
 
-                        @res.should.be.an.oauthError("BadRequest", "invalid_request",
-                                                     "Must include a basic access authentication header.")
+                        @res.should.be.an.oauthError("BadRequest", "BadRequest",
+                                                     "Must include a basic access authentication header")
 
                     it "should not call the `grantClientToken` hook", ->
                         @doIt()

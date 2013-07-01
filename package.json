@@ -2,7 +2,7 @@
   "name": "restify-oauth2-cc",
   "description": "OAuth 2 client credentials flow endpoint for restify",
   "keywords": ["restify", "oauth", "oauth2", "rest", "authentication", "api"],
-  "version": "2.1.3",
+  "version": "2.1.4",
   "author": "muji <noop@xpm.io>",
   "license": "MIT",
   "repository": {
