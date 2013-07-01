@@ -21,6 +21,7 @@ suite.before "Set token if available", (outgoing) ->
 
 suite
     .use("localhost", 8080) # TODO: https!!
+    .discuss("With no authorization header")
     .get("/secret")
         .expect(401)
         .expect("should respond with WWW-Authenticate and Link headers", (err, res, body) ->
@@ -29,6 +30,7 @@ suite
             res.headers.should.have.property("www-authenticate").that.equals('Bearer realm="Authenticated Realm"')
             res.headers.should.have.property("link").that.equals(expectedLink)
         )
+    .undiscuss()
     .next()
     .get("/")
         .expect(
