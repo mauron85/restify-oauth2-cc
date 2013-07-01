@@ -149,7 +149,7 @@ describe "Client Credentials flow", ->
                     it "should send a 400 response with error_type=NotAuthorized", ->
                         @doIt()
 
-                        @res.should.be.an.oauthError("NotAuthorized", "NotAuthorized",
+                        @res.should.be.an.oauthError("Unauthorized", "NotAuthorized",
                                                      "Authorization header is required")
 
                     it "should not call the `grantClientToken` hook", ->
@@ -166,7 +166,7 @@ describe "Client Credentials flow", ->
                     it "should send a 400 response with error_type=NotAuthorized", ->
                         @doIt()
 
-                        @res.should.be.an.oauthError("NotAuthorized", "NotAuthorized",
+                        @res.should.be.an.oauthError("Unauthorized", "NotAuthorized",
                                                      "Authorization header is required")
 
                     it "should not call the `grantClientToken` hook", ->
