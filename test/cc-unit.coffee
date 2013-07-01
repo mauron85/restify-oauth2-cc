@@ -150,7 +150,7 @@ describe "Client Credentials flow", ->
                         @doIt()
 
                         @res.should.be.an.oauthError("BadRequest", "BadRequest",
-                                                     "Must include a basic access authentication header")
+                                                     "Authorization header is required")
 
                     it "should not call the `grantClientToken` hook", ->
                         @doIt()
@@ -167,7 +167,7 @@ describe "Client Credentials flow", ->
                         @doIt()
 
                         @res.should.be.an.oauthError("BadRequest", "BadRequest",
-                                                     "Must include a basic access authentication header")
+                                                     "Authorization header is required")
 
                     it "should not call the `grantClientToken` hook", ->
                         @doIt()
